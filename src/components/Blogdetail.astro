@@ -1,0 +1,102 @@
+---
+import Blocks from '@/components/Blocks.astro';
+
+const { article } = Astro.props;
+const blocks = article.content ?? [];
+
+// Construit le sommaire à partir des titres de niveau 2
+const slugify = (t) => t.toLowerCase().replace(/[^a-z0-9]+/g, '-').replace(/^-|-$/g, '');
+const sommaire = blocks
+  .filter((b) => b.type === 'heading' && b.level === 2)
+  .map((b) => {
+    const texte = b.children.map((c) => c.text).join('');
+    return { texte, id: slugify(texte) };
+  });
+---
+
+<main class="article-page">
+  <h1>{article.title}</h1>
+  <p class="date">{new Date(article.publishedAt).toLocaleDateString('fr-FR', { day: 'numeric', month: 'long', year: 'numeric' })}</p>
+
+  <div class="article-layout">
+    <nav class="sommaire">
+      <ol>
+        {sommaire.map((item) => (
+          <li><a href={`#${item.id}`}>{item.texte}</a></li>
+        ))}
+      </ol>
+    </nav>
+
+    <div class="article-contenu">
+      <img src={`http://localhost:1337${article.cover.url}`} alt={article.title} class="cover" />
+      <p class="intro">{article.description}</p>
+      <Blocks blocks={blocks} />
+    </div>
+  </div>
+</main>
+
+<style>
+  .article-page { 
+    max-width: 1650px;
+    margin: 0 auto; 
+    padding: 2rem; 
+  
+}
+
+  h1 { font-size: 2.8rem; 
+    color: #1a1a2e; 
+    margin-bottom: 0.5rem; 
+  }
+
+  .date { 
+    color: #888; 
+    margin-bottom: 2rem; 
+  }
+
+  .article-layout { 
+    display: flex; 
+    gap: 3rem; 
+    align-items: flex-start; 
+  }
+
+  .sommaire { 
+    background: #FCE9A0; 
+    padding: 1.5rem; 
+    border-radius: 4px; 
+    flex: 0 0 300px; 
+    position: sticky;
+    top: 2rem;
+  }
+
+  .sommaire ol { 
+    padding-left: 1.2rem; 
+  }
+
+  .sommaire li { 
+    margin-bottom: 0.8rem; 
+  }
+
+  .sommaire a { 
+    color: #1a1a2e; 
+    text-decoration: none; 
+  }
+
+  .sommaire a:hover { 
+    text-decoration: underline; 
+  }
+  .article-contenu { 
+    flex: 1; 
+  }
+  .cover { 
+    width: 100%; 
+    border-radius: 4px; 
+    margin-bottom: 2rem; 
+  }
+
+  .intro { font-size: 1.1rem; 
+  color: #444; 
+  line-height: 1.7; 
+  margin-bottom: 2rem; 
+  }
+
+</style>

@@ -1,0 +1,22 @@
+---
+import Layout from '../layouts/Layout.astro';
+import Header from '../components/Header.astro';
+import Footer from '../components/Footer.astro';
+import Blog from '../components/Blog.astro';
+---
+
+<Layout>
+  <div class="header-shadow">
+    <Header />
+  </div>
+  <Blog />
+  <Footer />
+</Layout>
+
+<style>
+  .header-shadow {
+    box-shadow: 0 2px 10px rgba(0, 0, 0, 0.32);
+    position: relative;
+    z-index: 10;
+  }
+</style>

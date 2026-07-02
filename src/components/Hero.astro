@@ -1,0 +1,66 @@
+---
+import astroLogo from '../assets/astro.svg';
+import background from '../assets/background.svg';
+import Button from '../components/Button.astro';
+---
+<section class="hero">
+  <img src="/bg-banner-mapi-edited-prog-scaled.jpg" alt="mapi" class="hero-bg">
+  <div class="hero-texte">
+    <h1>Envoyez des messages <br> SMS à vos clients de manière simple et facile !</h1>
+    <p>Envoyez vos messages de manière fiable, en utilisant le bon opérateur pour chaque destinataire; et le tout dans un seul et unique outil.</p>
+    <Button texte="Commencez gratuitement" href="/essai" style="jaune" />
+  </div>
+</section>
+
+ <style>
+
+    .hero {
+      position: relative;
+      display: flex;
+      align-items: center;
+      min-height: 500px;
+      overflow: hidden;
+    }
+    .hero::after {
+      content: '';
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      background-color: rgba(0, 0, 0, 0.5);
+      z-index: 1;
+    }
+
+    .hero-bg {
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      z-index: 1;
+    }
+
+    .hero-texte {
+      position: relative;
+      z-index: 2;
+      max-width: 45%;
+      padding: 4rem 6rem;
+      color: white;
+    }
+
+    h1 {
+      font-family: 'Inter', sans-serif;
+      font-size: 4rem;
+      font-weight: 400;
+      margin-bottom: 1rem;
+      color: rgb(255, 255, 255); 
+    }
+
+    p {
+      font-size: 1.5rem;
+      color: #ffffff;
+      margin-bottom: 3rem;
+    }
+ </style>

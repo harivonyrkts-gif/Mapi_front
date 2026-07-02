@@ -1,0 +1,82 @@
+---
+import astroLogo from '../assets/astro.svg';
+import background from '../assets/background.svg';
+import Button from '../components/Button.astro';
+---
+<section class="fct">
+  <div class="fct-container">
+    <h1>Comment ça fonctionne ?</h1>
+    <div class="fct-content">
+      <div class="fct-image">
+        <img src="/illustration-social.png" alt="mapi" />
+      </div>
+
+      <div class="fct-texte">
+        <p>
+          Commencer est très simple: vous ouvrez un compte ici en ligne,
+          et en quelques minutes vous commencez à envoyer vos premiers SMS.
+          Si vous avez besoin d’envoyer des messages en volume, vous pouvez acheter en ligne avec votre compte de monnaie mobile,
+          et bientôt par carte bancaire.
+        </p>
+        <Button texte="Commencez gratuitement" href="/essai" style="jaune" />
+      </div>
+    </div>
+  </div>
+</section>
+
+<style>
+  .fct {
+    background-color: #333;
+    padding: 3rem 2rem;
+    color: white;
+    font-family: 'Inter', sans-serif;
+  }
+
+  .fct-container {
+    max-width: 1600px;
+    margin: 0 auto;
+    padding: 0 1rem;
+    margin-bottom: 1rem;
+  }
+
+  .fct-container h1 {
+    color: #D49500;
+    font-size: 2.4rem;
+    font-weight: 700;
+    margin-bottom: 2rem;
+    margin-left: 0;
+}
+  .fct-content {
+    display: flex;
+    align-items: center; 
+    justify-content: space-between;
+    gap: 3rem;
+  }
+
+  .fct-image {
+    flex: 0 0 550px;;
+  }
+
+  .fct-image img {
+    width: 100%;
+    height: auto;
+    display: block;
+  }
+
+  .fct-texte {
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    max-width: 100%;
+  }
+
+  .fct p {
+    font-size: 1.5rem;
+    line-height: 1.5;
+    margin-bottom: 2.5rem;
+    max-width: 100%; 
+    color: #efefef;
+  }
+
+</style>

@@ -1,0 +1,33 @@
+---
+import { GET } from '@/lib/apirequest';
+import Layout from '@/layouts/Layout.astro';
+import Header from '@/components/Header.astro';
+import Footer from '@/components/Footer.astro';
+import Blogdetail from '@/components/Blogdetail.astro';
+
+export async function getStaticPaths() {
+  const articles = await GET('http://localhost:1337/api/articles?populate=*');
+  return articles.map((article) => ({
+    params: { slug: article.slug },
+    props: { article },
+  }));
+}
+
+const { article } = Astro.props;
+---
+
+<Layout>
+  <div class="header-shadow"> 
+  <Header />
+</div>
+  <Blogdetail article={article} />
+  <Footer />
+</Layout>
+
+<style>
+  .header-shadow {
+    box-shadow: 0 2px 10px rgba(0, 0, 0, 0.32);
+    position: relative;
+    z-index: 10;
+  }
+</style>

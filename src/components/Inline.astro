@@ -1,0 +1,7 @@
+---
+const { child } = Astro.props;
+---
+{child.bold ? <strong>{child.text}</strong>
+  : child.italic ? <em>{child.text}</em>
+  : child.underline ? <u>{child.text}</u>
+  : child.text}

@@ -1,0 +1,94 @@
+---
+import { GET } from '../lib/apirequest'
+const testimonials = await GET('http://localhost:1337/api/testimonials?populate=photo')
+---
+<section class="testimonials-section">
+  <div class="container">
+    <h2>Témoignages de nos clients</h2>
+    <div class="testimonials-grid">
+      {testimonials.map((t) => (
+        <div class="testimonial-card">
+          <div class="testimonial-image">
+            <img
+              src={t.photo ? `http://localhost:1337${t.photo.url}` : '/img-testimony.jpg'}
+              alt={t.author_name}
+            />
+          </div>
+          <div class="testimonial-content">
+            <p class="quote">« {t.quote} »</p>
+            <p class="author">
+              <strong>{t.author_name}</strong>, {t.author_role} — <strong>{t.company}</strong>
+            </p>
+          </div>
+        </div>
+      ))}
+    </div>
+  </div>
+</section>
+
+<style>
+  .testimonials-section {
+    background-color: #f5f5f5;
+    padding: 1rem;
+    font-family: 'Inter', sans-serif;
+  }
+
+  .container {
+    max-width: 1800px;
+    margin: 0 auto;
+    background: #eeeeee; 
+    padding: 3rem;
+    border-radius: 4px;
+    box-shadow: 0 4px 20px rgb(0, 0, 0); 
+  }
+
+  h2 {
+    color: #FFB400;
+    font-size: 2rem;
+    margin-bottom: 3rem;
+    font-weight: 600;
+  }
+
+  .testimonials-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr; 
+    gap: 3rem; 
+  }
+
+  .testimonial-card {
+    display: flex;
+    align-items: flex-start;
+    gap: 1.5rem; 
+  }
+
+  .testimonial-image {
+    flex-shrink: 0; 
+  }
+
+  .testimonial-image img {
+    width: 180px;
+    height: 180px;
+    object-fit: cover; 
+    border-radius: 2px;
+  }
+
+  .testimonial-content {
+    color: #333;
+    line-height: 1.5;
+  }
+
+  .quote {
+    font-size: 0.95rem;
+    margin-bottom: 1.5rem;
+    font-style: normal;
+  }
+
+  .author {
+    font-size: 0.9rem;
+    color: #000;
+  }
+
+  .author strong {
+    font-weight: 700;
+  }
+</style>

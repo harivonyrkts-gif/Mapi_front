@@ -1,0 +1,55 @@
+---
+import { GET } from '../lib/apirequest';
+const Sponsor = await GET('http://localhost:1337/api/clients?populate=logo')
+---
+
+<section class="Sponsor">
+  <div class="Sponsor-container">
+    <h2>Ils nous font confiance</h2>
+    <div class="logos-grid">
+      {Sponsor.map((client) => (
+        <img
+          src={`http://localhost:1337${client.logo.url}`}
+          alt={client.name}
+          class="logo-img"
+        />
+      ))}
+    </div>
+  </div>
+</section>
+
+<style>
+  .Sponsor {
+    padding: 5rem 2rem;
+    font-family: 'Inter', sans-serif;
+    text-align: center;
+  }
+
+  .Sponsor-container {
+    max-width: 1100px;
+    margin: 0 auto;
+  }
+
+  h2 {
+    color: #565656;
+    font-size: 2.5rem;
+    font-weight: 400;
+    margin-bottom: 4rem;
+  }
+
+  .logos-grid {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    align-items: center;
+    gap: 4rem 6rem;
+  }
+
+  .logo-img {
+    max-width: 300px;
+    width: auto;
+    height: auto;
+    object-fit: contain;
+    transition: transform 0.3s ease;
+  }
+</style>

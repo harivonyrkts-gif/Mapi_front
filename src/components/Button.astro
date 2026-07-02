@@ -1,0 +1,49 @@
+---
+const { texte, href, style = "noir" } = Astro.props;
+---
+<a href={href} class={`btn btn-${style}`}>{texte}
+</a>
+<style>
+.boutons {
+    display: flex;
+    gap: 1rem;
+}
+
+.btn {
+    padding: 0.75rem 1.5rem;
+    border-radius: 5px;
+    text-decoration: none;
+    font-weight: bold;
+    cursor: pointer;
+}
+
+.btn-noir {
+    background-color: #262626;
+    color: white;
+    padding: 0.75rem 1.5rem;
+    border-radius: 10px;
+    text-decoration: none;
+    margin-right: 1.5rem;
+}
+
+.btn-ghost {
+    background: transparent;
+    border: 2px solid #111;
+    color: #111827;
+    font-weight: 200;
+    margin-right: 15rem;
+}
+
+.btn:hover {
+    opacity: 0.8;
+}
+
+.btn-jaune {
+    background-color: #f5c518;
+    color: #111;
+    padding: 0.75rem 1.5rem;
+    border-radius: 5px;
+    text-decoration: none;
+    font-weight: 600;
+  }
+</style>

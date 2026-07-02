@@ -1,0 +1,56 @@
+---
+import Inline from '@/components/Inline.astro';
+const { blocks } = Astro.props;
+const slugify = (t) => t.toLowerCase().replace(/[^a-z0-9]+/g, '-').replace(/^-|-$/g, '');
+const texteBrut = (children) => children.map((c) => c.text).join('');
+---
+
+{blocks.map((block) => {
+  if (block.type === 'heading') {
+    const id = slugify(texteBrut(block.children));
+    if (block.level === 1) return <h1 id={id}>{block.children.map((c) => <Inline child={c} />)}</h1>;
+    if (block.level === 2) return <h2 id={id}>{block.children.map((c) => <Inline child={c} />)}</h2>;
+    return <h3 id={id}>{block.children.map((c) => <Inline child={c} />)}</h3>;
+  }
+  if (block.type === 'paragraph') {
+    return <p>{block.children.map((c) => <Inline child={c} />)}</p>;
+  }
+  if (block.type === 'list') {
+    const items = block.children.map((li) => (
+      <li>{li.children.map((c) => <Inline child={c} />)}</li>
+    ));
+    return block.format === 'ordered' ? <ol>{items}</ol> : <ul>{items}</ul>;
+  }
+  if (block.type === 'quote') {
+    return <blockquote>{block.children.map((c) => <Inline child={c} />)}</blockquote>;
+  }
+  return null;
+})}
+
+<style>
+  h2 { 
+    font-size: 1.8rem; 
+    color: #1a1a2e; 
+    margin: 2rem 0 1rem; 
+}
+  h3 { 
+    font-size: 1.3rem; 
+    color: #d39e00; 
+    margin: 1.5rem 0 0.8rem; 
+}
+  p { 
+    line-height: 1.8; 
+    color: #333; 
+    margin-bottom: 1.2rem; 
+}
+  ul, ol { 
+    margin: 1rem 0 1.5rem 1.5rem; 
+    line-height: 1.8; 
+}
+  blockquote { 
+    border-left: 4px solid #FFB400; 
+    padding-left: 1rem; 
+    font-style: italic; 
+    color: #555; 
+    }
+</style>

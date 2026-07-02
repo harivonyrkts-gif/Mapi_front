@@ -1,0 +1,22 @@
+---
+import Button from '../components/Button.astro';
+---
+<header class="flex justify-between items-center py-4 px-8 bg-[#f8f8f8]">
+  <div class="logo ml-32">
+    <a href="/">
+      <img src="/Logo-mapi.svg" alt="mapi" class="w-[210px] h-auto" width="210" height="50" >
+    </a>
+  </div>
+
+  <nav class="flex items-center gap-10">
+    <a href="/tarifs" class="text-[1.7rem] text-[#666] hover:text-[#333] transition-colors">Tarifs</a>
+    <a href="https://mapi.mg/mapi-api/" target="_blank" rel="noopener noreferrer" class="text-[1.7rem] text-[#666] hover:text-[#333] transition-colors">APIs</a>
+    <a href="/blog" class="text-[1.7rem] text-[#666] hover:text-[#333] transition-colors">Blog</a>
+    <a href="/contact" class="text-[1.7rem] text-[#666] hover:text-[#333] transition-colors">Contact</a>
+  </nav>
+
+  <div class="flex items-center gap-4">
+    <Button texte="Essai gratuit" href="/essai" style="noir" />
+    <Button texte="Se connecter" href="/connexion" style="ghost" />
+  </div>
+</header>

@@ -1,0 +1,63 @@
+---
+import Header from "@/components/Header.astro"
+import Layout from "@/layouts/Layout.astro"
+import Footer from '../components/Footer.astro';
+import Contacts from "@/components/contacts.astro";
+---
+<Layout>
+<div class="header-shadow">
+    <Header />
+</div>
+  <Contacts />
+  <Footer />
+</Layout>
+
+<style>
+  .header-shadow {
+    box-shadow: 0 2px 10px rgba(0, 0, 0, 0.32);
+    position: relative;
+    z-index: 10;
+  }
+</style>
+
+<script>
+  const form = document.getElementById('contact-form');
+  const status = document.getElementById('status-message');
+
+  form.addEventListener('submit', async (e) => {
+    e.preventDefault();
+
+    const data = {
+      prenom: form.prenom.value,
+      nom: form.nom.value,
+      telephone: form.telephone.value,
+      email: form.email.value,
+      message: form.message.value,
+    };
+
+    status.textContent = 'Envoi en cours...';
+    status.style.color = '#555';
+
+    try {
+      const response = await fetch('/api/contact', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify(data),
+      });
+
+      const result = await response.json();
+
+      if (result.success) {
+        status.textContent = 'Message envoyé ! Nous vous répondrons rapidement.';
+        status.style.color = 'green';
+        form.reset();
+      } else {
+        status.textContent = 'Erreur : ' + result.error;
+        status.style.color = 'red';
+      }
+    } catch (error) {
+      status.textContent = 'Erreur de connexion';
+      status.style.color = 'red';
+    }
+  });
+</script>
